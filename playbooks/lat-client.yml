@@ -1,0 +1,19 @@
+---
+- name: Install dependencies to use land-availability-import
+  hosts: all
+  tasks:
+    - name: Install virtualenv and needed dependencies
+      apt: pkg={{ item }} state='latest' update_cache='yes'
+      become: True
+      with_items:
+        - virtualenv
+        - virtualenvwrapper
+    - name: Fetch latest land-availability-import code from Github
+      git:
+        repo: https://github.com/alphagov/land-availability-import.git
+        dest: "{{ ansible_env.HOME}}/land-availability-import"
+    - name: Install Python requirements
+      pip: 
+        requirements: "{{ ansible_env.HOME}}/land-availability-import/requirements.txt"
+        virtualenv: "{{ ansible_env.HOME}}/venvs/land-availability-import"
+        virtualenv_python: python3.5
