@@ -22,5 +22,5 @@ sudo apt-get install python-minimal
 # Usage
 
 ```
-ansible-playbook -i '54.210.234.125,' -u ubuntu playbooks/lat-client.yml
+ansible-playbook -i 'xxx.xxx.xxx.xxx,' -u ubuntu playbooks/lat-client.yml
 ```
